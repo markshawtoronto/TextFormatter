@@ -8,7 +8,8 @@ then
 	# Wake up the remote minifier in case it's idling
 	curl -I http://s9e-textformatter.rhcloud.com/ 2>/dev/null >/dev/null &
 
-	phpdbg -qrr $(which phpunit) --exclude-group needs-js --coverage-clover /tmp/clover.xml
+	composer require phpunit/phpunit
+	phpdbg -qrr vendor/bin/phpunit --exclude-group needs-js --coverage-clover /tmp/clover.xml
 else
 	phpunit --exclude-group needs-network
 fi
