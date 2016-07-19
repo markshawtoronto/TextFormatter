@@ -6,17 +6,17 @@ if [ "$TRAVIS_PHP_VERSION" != 'hhvm' ]
 then
 	echo "Disabling Zend GC"
 	echo "zend.enable_gc=0" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+	echo "Removing XDebug"
+	phpenv config-rm xdebug.ini
 fi
 
-# Install code coverage tools if applicable and disable XDebug otherwise
+# Install code coverage tools if applicable
 if [ -n "$COVERAGE" ]
 then
 	# Install Scrutinizer's external code coverage tool
 	echo "Installing Scrutinizer"
 	sh -c "./installScrutinizer.sh 2>&1 &" >/dev/null 2>&1 &
-else
-	echo "Removing XDebug"
-	phpenv config-rm xdebug.ini
 fi
 
 # Install Composer dependencies after XDebug has been removed
