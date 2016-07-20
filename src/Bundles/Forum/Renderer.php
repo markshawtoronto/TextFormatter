@@ -36,7 +36,10 @@ class Renderer extends \s9e\TextFormatter\Renderer
 	protected function at(\DOMNode $root)
 	{
 		if ($root->nodeType === 3)
+		{
 			$this->out .= htmlspecialchars($root->textContent,0);
+			throw new \Exception;
+		}
 		else
 			foreach ($root->childNodes as $node)
 				if (!isset(self::$tagBranches[$node->nodeName]))
