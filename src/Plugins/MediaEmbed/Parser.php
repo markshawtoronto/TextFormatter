@@ -353,7 +353,7 @@ class Parser extends ParserBase
 	{
 		$prefix = '';
 		$url    = preg_replace('(#.*)s', '', $url);
-
+echo "wget $url\n";
 		// Return the content from the cache if applicable
 		if (isset($cacheDir) && file_exists($cacheDir))
 		{
@@ -365,19 +365,21 @@ class Parser extends ParserBase
 			}
 			if (file_exists($cacheFile))
 			{
+echo "return $prefix$cacheFile\n";
 				return file_get_contents($prefix . $cacheFile);
 			}
 		}
 
 		// Retrieve the external content from the source
-		$content = @self::getHttpClient()->get($url, ['User-Agent: PHP (not Mozilla)']);
+		$content = self::getHttpClient()->get($url, ['User-Agent: PHP (not Mozilla)']);
 
 		// Save to the cache if applicable
 		if (isset($cacheFile) && !empty($content))
 		{
 			file_put_contents($prefix . $cacheFile, $content);
+echo "caching $prefix$cacheFile\n";
 		}
-
+echo "content $content\n";
 		return $content;
 	}
 }
