@@ -1,3 +1,3 @@
 #!/bin/bash
 
-phpunit needs-network
+phpunit --group needs-network
