@@ -21,7 +21,9 @@ class Curl extends Client
 	*/
 	public function get($url, $headers = [])
 	{
+echo "curl $url\n";
 		$handle = $this->getHandle();
+		curl_setopt($handle, CURLOPT_HEADER,     true);
 		curl_setopt($handle, CURLOPT_HTTPGET,    true);
 		curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
 		curl_setopt($handle, CURLOPT_URL,        $url);
