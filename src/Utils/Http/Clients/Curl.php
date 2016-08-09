@@ -27,7 +27,7 @@ echo "curl $url\n";
 		curl_setopt($handle, CURLOPT_HTTPGET,    true);
 		curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
 		curl_setopt($handle, CURLOPT_URL,        $url);
-
+var_dump(curl_exec($handle));
 		return curl_exec($handle);
 	}
 
